@@ -86,6 +86,16 @@ public class INIFileTest
   }
 
   /**
+   * Tests toString().
+   */
+  public void testToString() {
+    INIFile ini = new INIFile();
+    ini.set("section1", "key1", "value1");
+    ini.set("section2", "key2", 1);
+    assertTrue("Should have generated a string", ini.toString().length() > 0);
+  }
+
+  /**
    * Returns a test suite.
    *
    * @return		the test suite

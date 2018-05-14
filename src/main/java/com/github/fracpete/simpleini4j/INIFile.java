@@ -31,6 +31,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -272,6 +273,25 @@ public class INIFile
   }
 
   /**
+   * Returns the INI file as string.
+   *
+   * @return		the INI file
+   */
+  public String toString() {
+    StringWriter	swriter;
+
+    swriter = new StringWriter();
+    try {
+      m_Configuration.write(swriter);
+    }
+    catch (Exception e) {
+      throw new IllegalStateException("Failed to turn configuration into string!");
+    }
+
+    return swriter.toString();
+  }
+
+  /**
    * Reads the INI file.
    *
    * @return		null if failed to read, empty if not present (yet)
@@ -318,6 +338,16 @@ public class INIFile
       e.printStackTrace();
       return null;
     }
+  }
+
+  /**
+   * Writes the configuration to disk.
+   *
+   * @param file	the file to write to
+   * @return		null if successfully written, otherwise error message
+   */
+  public String write(File file) {
+    return write(file.getAbsolutePath());
   }
 
   /**
